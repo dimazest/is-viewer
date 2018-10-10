@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Incident Streams",
+  "name": "Incident Streams Viewer",
   "icons": [
     {
       "src": "favicon.ico",
