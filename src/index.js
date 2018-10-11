@@ -12,7 +12,8 @@ const rootReducer = (state, action) => {
     return state
 }
 
-window.store = createStore(rootReducer, {}, applyMiddleware(logger))
+const initialState = window._state
+window.store = createStore(rootReducer, initialState, applyMiddleware(logger))
 
 ReactDOM.render(
     <Provider store={window.store}>
