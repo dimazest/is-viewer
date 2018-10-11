@@ -37,15 +37,13 @@ let Categories = () => (
                 <CategoryGroup title="Report" categories={[
                         "First Party Observation", "Third Party Observation", "Weather",
                         "Emerging Threats", "Significant Event Change", "Multimedia Share",
-                        "Service Available", "Factoid", "Official", "Clenaup", "Hashtags"
-                ]}/>
+                        "Service Available", "Factoid", "Official", "Clenaup", "Hashtags"]}/>
             </div>
 
             <div className="col">
                 <CategoryGroup title="Other" categories={[
                         "Past News", "Continuing News", "Advice", "Sentiment", "Discussion",
-                        "Irrelevant", "Unknown", "Known already",
-                ]}/>
+                        "Irrelevant", "Unknown", "Known already"]}/>
 
             </div>
         </div>
