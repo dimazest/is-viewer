@@ -1,8 +1,8 @@
 import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery';
-import PopperJS from 'popper.js';
+import 'jquery';
+import 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'open-iconic/font/css/open-iconic-bootstrap.css';
 import './App.css';
