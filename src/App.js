@@ -9,6 +9,49 @@ import './App.css';
 
 import TweetEmbed from './tweet-embed'
 
+let CategoryGroup = ({title, categories}) => (
+    <div className="card mb-4" style={{minWidth: "200px"}}>
+        <div className="card-header">
+            <h5>{title}</h5>
+        </div>
+        <ul className="list-group list-group-flush">
+            {categories.map((c) =><li className="list-group-item" key={c}>{c}</li>)}
+        </ul>
+    </div>
+)
+
+let Categories = () => (
+    <div className="container-fluid">
+        <div className="row">
+            <div className="col">
+                <CategoryGroup title="Request" categories={["Goods and Services", "Search and Rescue", "Information Wanted"]}/>
+            </div>
+
+            <div className="col">
+                <CategoryGroup title="Call to Action" categories={["Volunteer", "Donations", "Move People"]}/>
+            </div>
+
+        </div>
+        <div className="row">
+            <div className="col">
+                <CategoryGroup title="Report" categories={[
+                        "First Party Observation", "Third Party Observation", "Weather",
+                        "Emerging Threats", "Significant Event Change", "Multimedia Share",
+                        "Service Available", "Factoid", "Official", "Clenaup", "Hashtags"
+                ]}/>
+            </div>
+
+            <div className="col">
+                <CategoryGroup title="Other" categories={[
+                        "Past News", "Continuing News", "Advice", "Sentiment", "Discussion",
+                        "Irrelevant", "Unknown", "Known already",
+                ]}/>
+
+            </div>
+        </div>
+    </div>
+)
+
 let App = () => (
     <div>
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -21,79 +64,7 @@ let App = () => (
                 <TweetEmbed id="1050095243318714368" />
             </div>
             <div className="col jumbotron ml-2">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col">
-                            <div className="card mb-4" style={{minWidth: "200px"}}>
-                                <div className="card-header">
-                                    <h5>Request</h5>
-                                </div>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">Goods and Services</li>
-                                    <li className="list-group-item">Search and Rescue</li>
-                                    <li className="list-group-item">Information Wanted</li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                        <div className="col">
-                            <div className="card mb-4" style={{minWidth: "200px"}}>
-                                <div className="card-header">
-                                    <h5>Call to Action</h5>
-                                </div>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">Volunteer</li>
-                                    <li className="list-group-item">Donations</li>
-                                    <li className="list-group-item">Move People</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <div className="card mb-4" style={{minWidth: "200px"}}>
-                                <div className="card-header">
-                                    <h5>Report</h5>
-                                </div>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">First Party Observation</li>
-                                    <li className="list-group-item">Third Party Observatoin</li>
-                                    <li className="list-group-item">Weather</li>
-                                    <li className="list-group-item">Emerging Threats</li>
-                                    <li className="list-group-item">Significant Event Change</li>
-                                    <li className="list-group-item">Multimedia Share</li>
-                                    <li className="list-group-item">Service Available</li>
-                                    <li className="list-group-item">Factoid</li>
-                                    <li className="list-group-item">Official</li>
-                                    <li className="list-group-item">Clenaup</li>
-                                    <li className="list-group-item">Hashtags</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div className="col">
-                            <div className="card" style={{minWidth: "200px"}}>
-                                <div className="card-header">
-                                    <h5>Other</h5>
-                                </div>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">Past News</li>
-                                    <li className="list-group-item">Continuing News</li>
-                                    <li className="list-group-item">Advice</li>
-                                    <li className="list-group-item">Sentiment</li>
-                                    <li className="list-group-item">Discussion</li>
-                                    <li className="list-group-item">Irrelevant</li>
-                                    <li className="list-group-item">Unknown</li>
-                                    <li className="list-group-item">Known Already</li>
-                                </ul>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
+            <Categories />
             </div>
         </div>
     </main>
