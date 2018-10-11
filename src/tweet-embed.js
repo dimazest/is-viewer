@@ -22,7 +22,8 @@ class TweetEmbed extends React.Component {
     componentDidMount () {
         const renderTweet = () => {
             window.twttr.ready().then(({ widgets }) => {
-                const { options, onTweetLoadSuccess, onTweetLoadError, id } = this.props
+                // const { options, onTweetLoadSuccess, onTweetLoadError, id } = this.props
+                const { id } = this.props
 
                 this._div.innerHTML = `
                     <blockquote class="twitter-tweet card-blockquote" data-dnt="true">
