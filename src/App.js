@@ -13,7 +13,7 @@ import TweetEmbed from './tweet-embed'
 
 import * as actions from './actions'
 
-let Navigation = ({annotations, onChangeAnnotation}) => (
+let Navigation = ({annotations, onChangeAnnotation, annotationID}) => (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <span className="navbar-brand h1 mb-0">Incident Streams</span>
 
@@ -29,7 +29,9 @@ let Navigation = ({annotations, onChangeAnnotation}) => (
                         <span className="input-group-text">Annotation</span>
                     </div>
                     <select className="custom-select custom-select-sm"
-                        onChange={e => onChangeAnnotation(e.target.value)} >
+                        onChange={e => onChangeAnnotation(e.target.value)}
+                        value={annotationID}
+                        >
                         {Object.entries(annotations).map(([key, {title}]) => (
                             <option value={key} key={key}>{title}</option>))}
                     </select>
@@ -39,7 +41,7 @@ let Navigation = ({annotations, onChangeAnnotation}) => (
     </nav>
 )
 Navigation = connect(
-    state => ({annotations: state.data.annotations}),
+    state => ({annotations: state.data.annotations, annotationID: state.ui.annotationID}),
     dispatch => ({onChangeAnnotation: annotationID => dispatch(actions.annotationSelected(annotationID))})
 )(Navigation)
 
