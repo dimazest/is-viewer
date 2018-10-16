@@ -21,17 +21,14 @@ export const ui = (state = {}, action) => {
     }}
 }
 
-export const data = (state = {}, action) => {
+export const annotations = (state = {}, action) => {
     switch (action.type) {
     case actions.ANNOTATION_RECEIVED: {
         return {
             ...state,
-            annotations: {
-                ...state.annotations,
-                [action.annotationID]: {
-                    ...(state.annotations[action.annotationID] || {}),
-                    data: action.payload,
-                }
+            [action.annotationID]: {
+                ...(state[action.annotationID] || {}),
+                payload: action.payload,
             }
         }}
     default: {

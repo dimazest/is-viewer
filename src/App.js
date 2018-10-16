@@ -27,7 +27,7 @@ const Select = ({title, onChange, value, values}) => (
 )
 
 let Navigation = ({annotations, onChangeAnnotation, annotationID, eventID, onChangeEvent}) => {
-    const eventsAnnotated = objectPath.get(annotations, [annotationID, 'data', 'annotator', 'eventsAnnotated'], []).map(i => [i.identifier, i.name])
+    const eventsAnnotated = objectPath.get(annotations, [annotationID, 'payload', 'annotator', 'eventsAnnotated'], []).map(i => [i.identifier, i.name])
 
     return <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <span className="navbar-brand h1 mb-0">Incident Streams</span>
@@ -46,7 +46,7 @@ let Navigation = ({annotations, onChangeAnnotation, annotationID, eventID, onCha
 }
 Navigation = connect(
     state => ({
-        annotations: state.data.annotations,
+        annotations: state.annotations,
         annotationID: state.ui.annotationID,
         eventID: state.ui.eventIDbyAnnotationID[state.ui.annotationID],
     }),

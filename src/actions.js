@@ -18,8 +18,8 @@ export const ANNOTATION_FETCH_REQUESTED = 'ANNOTATION_FETCH_REQUESTED'
 export const fetchAnnotation = annotationID => (
     (dispatch, getState) => {
         const state = getState()
-        const annotation  = objectPath.get(state, ['data', 'annotations', annotationID])
-        if (!annotation.data) {
+        const annotation  = objectPath.get(state, ['annotations', annotationID])
+        if (!annotation.payload) {
             return fetch(annotation.url)
             .then(r => r.json())
             .then(j => dispatch(annotationReceived(annotationID, j)))
