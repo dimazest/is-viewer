@@ -96,7 +96,23 @@ const Categories = () => (
     </div>
 )
 
-let App = () => (
+let EventDescription = ({annotationID, eventID, annotations}) => {
+    const eventInfo = objectPath.get(annotations, [annotationID, 'payload', 'annotator', 'eventsAnnotated'], new Map()).get(eventID)
+
+    return (<div>
+        <h5 className="mt-5">Event description</h5>
+        <p dangerouslySetInnerHTML={{__html: objectPath.get(eventInfo, 'description')}} />
+    </div>)
+}
+EventDescription = connect(
+    state => ({
+        annotationID: state.ui.annotationID,
+        eventID: state.ui.eventIDbyAnnotationID[state.ui.annotationID],
+        annotations: state.annotations,
+    })
+)(EventDescription)
+
+const App = () => (
     <div>
         <Navigation />
 
@@ -104,6 +120,7 @@ let App = () => (
             <div className="row mx-1">
                 <div className="col jumbotron mx-auto" style={{minWidth: "300px", maxWidth: "500px"}}>
                     <TweetEmbed id="1050095243318714368" />
+                    <EventDescription />
                 </div>
                 <div className="col jumbotron ml-2">
                 <Categories />
