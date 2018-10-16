@@ -16,8 +16,8 @@ const eventAnnotationObserver = observer(
         eventIDforAnnotation: state.ui.eventIDbyAnnotationID[state.ui.annotationID],
     }),
     (dispatch, {annotationID, annotation, eventIDforAnnotation}, previous) => {
-        if (annotation.payload) {
-            dispatch(actions.eventSelected(annotationID, eventIDforAnnotation || annotation.payload.events[0].eventid))
+        if (annotation.payload && !eventIDforAnnotation) {
+            dispatch(actions.eventSelected(annotationID, annotation.payload.events[0].eventid))
         }
     }
 )

@@ -112,6 +112,22 @@ EventDescription = connect(
     })
 )(EventDescription)
 
+let TweetBox = ({annotationID, eventID, annotations}) => {
+    const tweets = (objectPath.get(annotations, [annotationID, 'payload', 'events'], new Map()).get(eventID) || {}).tweets || [{}]
+    const tweetID = (tweets[0] || {}).postID
+    return <div key={`tweet-${tweetID}`}>
+        {tweetID && <TweetEmbed id={tweetID} />}
+    </div>
+}
+TweetBox = connect(
+    state => ({
+        annotationID: state.ui.annotationID,
+        eventID: state.ui.eventIDbyAnnotationID[state.ui.annotationID],
+        annotations: state.annotations,
+    })
+)(TweetBox)
+
+
 const App = () => (
     <div>
         <Navigation />
@@ -119,7 +135,7 @@ const App = () => (
         <main className="container-fluid" role="main">
             <div className="row mx-1">
                 <div className="col jumbotron mx-auto" style={{minWidth: "300px", maxWidth: "500px"}}>
-                    <TweetEmbed id="1050095243318714368" />
+                    <TweetBox />
                     <EventDescription />
                 </div>
                 <div className="col jumbotron ml-2">
