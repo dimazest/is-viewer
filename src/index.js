@@ -13,6 +13,7 @@ import thunk from 'redux-thunk'
 import App from './App'
 import * as reducers from './reducers'
 import observers from './observers'
+import * as actions from './actions'
 
 const rootReducer = combineReducers(reducers)
 
@@ -21,6 +22,8 @@ const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logg
 window.store = store
 
 observe(store, observers)
+
+store.dispatch(actions.fetchAnnotation(initialState.ui.annotationID))
 
 ReactDOM.render(
     <Provider store={store}>

@@ -6,7 +6,24 @@ export const ui = (state = {}, action) => {
         return {
             ...state,
             annotationID: action.annotationID,
+            eventID: undefined,
         }}
+    case actions.EVENT_SELECTED: {
+        return {
+            ...state,
+            eventID: action.eventID,
+            eventIDbyAnnotationID: {
+                ...state.eventIDbyAnnotationID,
+                [action.annotationID]: action.eventID,
+            }
+        }
+    }
+    case actions.RESET_UI_EVENT_SELECTION: {
+        return {
+            ...state,
+            eventID: undefined,
+        }
+    }
     default: {
         return state
     }}

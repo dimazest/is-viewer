@@ -8,13 +8,28 @@ import 'open-iconic/font/css/open-iconic-bootstrap.css';
 import './App.css';
 
 import { connect } from 'react-redux'
+import objectPath from 'object-path'
 
 import TweetEmbed from './tweet-embed'
 
 import * as actions from './actions'
 
-let Navigation = ({annotations, onChangeAnnotation, annotationID}) => (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+const Select = ({title, onChange, value, values}) => (
+    <div className="input-group input-group-sm mr-2">
+        <div className="input-group-prepend">
+            <span className="input-group-text">{title}</span>
+        </div>
+        <select className="custom-select custom-select-sm"
+            onChange={e => onChange(e.target.value)} value={value}>
+            {values.map(([key, value]) => (<option value={key} key={key}>{value}</option>))}
+        </select>
+    </div>
+)
+
+let Navigation = ({annotations, onChangeAnnotation, annotationID, eventID, onChangeEvent}) => {
+    const eventsAnnotated = objectPath.get(annotations, [annotationID, 'data', 'annotator', 'eventsAnnotated'], []).map(i => [i.identifier, i.name])
+
+    return <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <span className="navbar-brand h1 mb-0">Incident Streams</span>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,27 +37,23 @@ let Navigation = ({annotations, onChangeAnnotation, annotationID}) => (
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
             <form className="form-inline">
-                <div className="input-group input-group-sm">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text">Annotation</span>
-                    </div>
-                    <select className="custom-select custom-select-sm"
-                        onChange={e => onChangeAnnotation(e.target.value)}
-                        value={annotationID}
-                        >
-                        {Object.entries(annotations).map(([key, {title}]) => (
-                            <option value={key} key={key}>{title}</option>))}
-                    </select>
-                </div>
+                <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={Object.entries(annotations).map(([key, {title}]) => [key, title])} />
+                {eventID && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotated} />}
             </form>
         </div>
     </nav>
-)
+}
 Navigation = connect(
-    state => ({annotations: state.data.annotations, annotationID: state.ui.annotationID}),
-    dispatch => ({onChangeAnnotation: annotationID => dispatch(actions.annotationSelected(annotationID))})
+    state => ({
+        annotations: state.data.annotations,
+        annotationID: state.ui.annotationID,
+        eventID: state.ui.eventID,
+    }),
+    dispatch => ({
+        onChangeAnnotation: (annotationID) => dispatch(actions.annotationSelected(annotationID)),
+        onChangeEvent: (annotationID, eventID) => dispatch(actions.eventSelected(annotationID, eventID)),
+    })
 )(Navigation)
 
 const CategoryGroup = ({title, categories}) => (
