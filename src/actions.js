@@ -22,7 +22,17 @@ export const fetchAnnotation = annotationID => (
         if (!annotation.payload) {
             return fetch(annotation.url)
             .then(r => r.json())
-            .then(j => dispatch(annotationReceived(annotationID, j)))
+            .then(j => dispatch(annotationReceived(
+                annotationID,
+                {
+                    ...j,
+                    events: new Map(j.events.map(v => [v.eventid, v])),
+                    annotator: {
+                        ...j.annotator,
+                        eventsAnnotated: new Map(j.annotator.eventsAnnotated.map(v => [v.identifier, v])),
+                    },
+                }
+            )))
     }}
 )
 
