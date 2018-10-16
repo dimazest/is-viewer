@@ -31,6 +31,3 @@ export const eventSelected = (annotationID, eventID) => ({
     type: EVENT_SELECTED,
     annotationID, eventID,
 })
-
-export const RESET_UI_EVENT_SELECTION = 'RESET_UI_EVENT_SELECTION'
-export const resetUIEventSelection = () => ({type: RESET_UI_EVENT_SELECTION})

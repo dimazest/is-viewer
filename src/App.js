@@ -48,7 +48,7 @@ Navigation = connect(
     state => ({
         annotations: state.data.annotations,
         annotationID: state.ui.annotationID,
-        eventID: state.ui.eventID,
+        eventID: state.ui.eventIDbyAnnotationID[state.ui.annotationID],
     }),
     dispatch => ({
         onChangeAnnotation: (annotationID) => dispatch(actions.annotationSelected(annotationID)),
