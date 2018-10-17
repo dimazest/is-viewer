@@ -10,9 +10,12 @@ export const ui = (state = {}, action) => {
     case actions.EVENT_SELECTED: {
         return {
             ...state,
-            eventIDbyAnnotationID: {
-                ...state.eventIDbyAnnotationID,
-                [action.annotationID]: action.eventID,
+            byAnnotation: {
+                ...state.byAnnotation,
+                [action.annotationID]: {
+                    ...state.byAnnotation[action.annotationID],
+                    eventID: action.eventID,
+                },
             }
         }
     }

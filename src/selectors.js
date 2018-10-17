@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect'
 import objectPath from 'object-path'
 
-const getEventsMetadata = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'annotator', 'eventsAnnotated'], new Map())
-const getEventID = ({ui}) => ui.eventIDbyAnnotationID[ui.annotationID]
-const getAnnotations = state => state.annotations
-const getEvents = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'events'], new Map())
+export const getEventsMetadata = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'annotator', 'eventsAnnotated'], new Map())
+export const getEventID = ({ui}) => ui.byAnnotation[ui.annotationID].eventID
+export const getAnnotations = state => state.annotations
+export const getEvents = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'events'], new Map())
 
 export const getEventInfo = state => {
     const events = getEventsMetadata(state)
@@ -24,7 +24,7 @@ export const getAnnotationsIDTitleItems = createSelector(
 )
 
 // const tweets = (.get(eventID) || {}).tweets || [{}]
-const getTweets = createSelector(
+export const getTweets = createSelector(
     [getEvents, getEventID],
     (events, eventID) => (events.get(eventID) || {}).tweets || [{}]
 )
