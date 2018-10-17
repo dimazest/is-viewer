@@ -49,7 +49,7 @@ TweetNavigation = connect(
 
 let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent}) => (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <span className="navbar-brand h1 mb-0">Incident Streams</span>
+        <span className="navbar-brand h1 mb-0">IS</span>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
