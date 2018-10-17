@@ -56,45 +56,45 @@ Navigation = connect(
     })
 )(Navigation)
 
-const CategoryGroup = ({title, categories}) => (
+const CategoryGroup = ({categoryGroup}) => (
     <div className="card mb-4" style={{minWidth: "200px"}}>
         <div className="card-header">
-            <h5>{title}</h5>
+            <h5>{categoryGroup.title}</h5>
         </div>
         <ul className="list-group list-group-flush">
-            {categories.map((c) =><li className="list-group-item" key={c}>{c}</li>)}
+            {categoryGroup.categories.map((i) =><li className="list-group-item" key={i.id}>{i.title}</li>)}
         </ul>
     </div>
 )
 
-const Categories = () => (
+let Categories = ({categoryGroups}) => (
     <div className="container-fluid">
         <div className="row">
             <div className="col">
-                <CategoryGroup title="Request" categories={["Goods and Services", "Search and Rescue", "Information Wanted"]}/>
+                <CategoryGroup categoryGroup={categoryGroups.request} />
             </div>
 
             <div className="col">
-                <CategoryGroup title="Call to Action" categories={["Volunteer", "Donations", "Move People"]}/>
+                <CategoryGroup categoryGroup={categoryGroups.callToAction} />
             </div>
 
         </div>
         <div className="row">
             <div className="col">
-                <CategoryGroup title="Report" categories={[
-                        "First Party Observation", "Third Party Observation", "Weather",
-                        "Emerging Threats", "Significant Event Change", "Multimedia Share",
-                        "Service Available", "Factoid", "Official", "Clenaup", "Hashtags"]}/>
+                <CategoryGroup categoryGroup={categoryGroups.report} />
             </div>
 
             <div className="col">
-                <CategoryGroup title="Other" categories={[
-                        "Past News", "Continuing News", "Advice", "Sentiment", "Discussion",
-                        "Irrelevant", "Unknown", "Known already"]}/>
+                <CategoryGroup categoryGroup={categoryGroups.other} />
             </div>
         </div>
     </div>
 )
+Categories = connect(
+    state => ({
+        categoryGroups: state.categoryGroups
+    })
+)(Categories)
 
 let EventDescription = ({eventInfo}) => (
     <div>

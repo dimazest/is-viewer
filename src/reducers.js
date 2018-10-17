@@ -58,3 +58,5 @@ export const annotations = (state = {}, action) => {
         return state
     }}
 }
+
+export const categoryGroups = (state = {}, action) => state
