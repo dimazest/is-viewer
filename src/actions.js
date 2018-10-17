@@ -41,3 +41,9 @@ export const eventSelected = (annotationID, eventID) => ({
     type: EVENT_SELECTED,
     annotationID, eventID,
 })
+
+export const ADVANCE_TWEET = 'ADVANCE_TWEET'
+export const advanceTweet = (annotationID, eventID, by=1) => ({
+    type: ADVANCE_TWEET,
+    annotationID, eventID, by,
+})

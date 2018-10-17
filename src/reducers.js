@@ -19,6 +19,26 @@ export const ui = (state = {}, action) => {
             }
         }
     }
+    case actions.ADVANCE_TWEET: {
+        const byEvent = {
+            ...(state.byAnnotation[action.annotationID].byEvent || {})
+        }
+        byEvent[action.eventID] = {
+            ...byEvent[action.eventID],
+            tweetIndex: ((byEvent[action.eventID] || {}).tweetIndex || 0) + action.by
+        }
+
+        return {
+            ...state,
+            byAnnotation: {
+                ...state.byAnnotation,
+                [action.annotationID]: {
+                    ...state.byAnnotation[action.annotationID],
+                    byEvent,
+                },
+            }
+        }
+    }
     default: {
         return state
     }}

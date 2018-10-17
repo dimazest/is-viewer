@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 import objectPath from 'object-path'
 
 export const getEventsMetadata = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'annotator', 'eventsAnnotated'], new Map())
+export const getAnnotationID = ({ui}) => ui.annotationID
 export const getEventID = ({ui}) => ui.byAnnotation[ui.annotationID].eventID
 export const getAnnotations = state => state.annotations
 export const getEvents = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'events'], new Map())
@@ -28,4 +29,17 @@ export const getTweets = createSelector(
     (events, eventID) => (events.get(eventID) || {}).tweets || [{}]
 )
 
-export const getTweetID = state => getTweets(state)[0].postID
+export const getTweetIndex = state => {
+    const annotationID = getAnnotationID(state)
+    const eventID = getEventID(state)
+    const tweets = getTweets(state)
+    const tweetIndex = objectPath.get(state, ['ui', 'byAnnotation', annotationID, 'byEvent', eventID], {}).tweetIndex || 0
+    return {
+        hasPrevious: tweetIndex > 0,
+        hasNext: tweetIndex < tweets.length,
+        total: tweets.length,
+        tweetIndex,
+    }
+}
+
+export const getTweetID = state => (getTweets(state)[getTweetIndex(state).tweetIndex] || {}).postID

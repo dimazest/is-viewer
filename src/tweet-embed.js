@@ -22,36 +22,34 @@ class TweetEmbed extends React.Component {
     componentDidMount () {
         const renderTweet = () => {
             window.twttr.ready().then(({ widgets }) => {
-                // const { options, onTweetLoadSuccess, onTweetLoadError, id } = this.props
-                const { id } = this.props
+                const { id, options } = this.props
 
-                this._div.innerHTML = `
-                    <blockquote class="twitter-tweet card-blockquote" data-dnt="true">
-                        <div class="card custom-tweet">
-                            <div class="card-block">
-                                <header>
-                                    <p class="twitter-user-name">${ this.props.user_name }</p>
-                                        <small class="text-muted">@${ this.props.screen_name }</small>
-                                </header>
-                                            <blockquote class="card-blockquote">
-                                                <p dir="ltr" lang="${ this.props.lang }" class="card-text">
-                                                    ${this.props.text}
-                                                </p>
-                                                    <small>
-                                                        <a href="https://twitter.com/${this.props.screen_name}/status/${id}">${this.props.created_at}</a>
-                                                    </small>
-                                            </blockquote>
-                            </div>
-                        </div>
-                    </blockquote>
-                `
+                // this._div.innerHTML = `
+                //     <blockquote class="twitter-tweet card-blockquote" data-dnt="true">
+                //         <div class="card custom-tweet">
+                //             <div class="card-block">
+                //                 <header>
+                //                     <p class="twitter-user-name">${ this.props.user_name }</p>
+                //                         <small class="text-muted">@${ this.props.screen_name }</small>
+                //                 </header>
+                //                             <blockquote class="card-blockquote">
+                //                                 <p dir="ltr" lang="${ this.props.lang }" class="card-text">
+                //                                     ${this.props.text}
+                //                                 </p>
+                //                                     <small>
+                //                                         <a href="https://twitter.com/${this.props.screen_name}/status/${id}">${this.props.created_at}</a>
+                //                                     </small>
+                //                             </blockquote>
+                //             </div>
+                //         </div>
+                //     </blockquote>
+                // `
+                //
+                // widgets.load(this._div)
 
-                widgets.load(this._div)
-
-                /* widgets*/
-                /* .createTweet(this.props.id, this._div, options)*/
-                /* .then(onTweetLoadSuccess)*/
-                /* .catch(onTweetLoadError)*/
+                widgets.createTweet(id, this._div, options)
+                // .then(onTweetLoadSuccess)
+                // .catch(onTweetLoadError)
 
             })
         }

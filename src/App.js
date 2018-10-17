@@ -117,6 +117,25 @@ TweetBox = connect(
     })
 )(TweetBox)
 
+let TweetNavigation = ({annotationID, eventID, advanceTweet, tweetIndex}) => {
+    const onClick = by => () => advanceTweet(annotationID, eventID, by)
+
+    return <div className="btn-group" role="group">
+      <button type="button" className={"btn " + (tweetIndex.hasPrevious ? "btn-secondary " : "btn-outline-secondary ")} onClick={tweetIndex.hasPrevious ? onClick(-1) : () => null}><span className="oi oi-media-skip-backward"></span></button>
+      <button type="button" className="btn btn-secondary">{tweetIndex.tweetIndex + 1} of {tweetIndex.total}</button>
+      <button type="button" className={"btn " + (tweetIndex.hasNext ? "btn-secondary " : "btn-outline-secondary ")} onClick={tweetIndex.hasNext ? onClick(1) : () => null}><span className="oi oi-media-skip-forward"></span></button>
+    </div>
+}
+TweetNavigation = connect(
+    state => ({
+        annotationID: selectors.getAnnotationID(state),
+        eventID: selectors.getEventID(state),
+        tweetIndex: selectors.getTweetIndex(state),
+    }),
+    dispatch => ({
+        advanceTweet: (annotationID, eventID, by) => dispatch(actions.advanceTweet(annotationID, eventID, by))
+    })
+)(TweetNavigation)
 
 const App = () => (
     <div>
@@ -125,6 +144,7 @@ const App = () => (
         <main className="container-fluid" role="main">
             <div className="row mx-1">
                 <div className="col jumbotron mx-auto" style={{minWidth: "300px", maxWidth: "500px"}}>
+                    <TweetNavigation />
                     <TweetBox />
                     <EventDescription />
                 </div>
