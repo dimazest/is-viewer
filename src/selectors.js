@@ -42,4 +42,4 @@ export const getTweetIndex = state => {
     }
 }
 
-export const getTweetID = state => (getTweets(state)[getTweetIndex(state).tweetIndex] || {}).postID
+export const getTweet = (state) => getTweets(state)[getTweetIndex(state).tweetIndex] || {}

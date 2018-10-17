@@ -106,14 +106,14 @@ EventDescription = connect(
     state => ({eventInfo: selectors.getEventInfo(state)})
 )(EventDescription)
 
-let TweetBox = ({tweetID}) => (
-    <div key={`tweet-${tweetID}`}>
-        {tweetID && <TweetEmbed id={tweetID} />}
+let TweetBox = ({tweet}) => (
+    <div key={`tweet-${tweet.postID}`}>
+        {tweet && <TweetEmbed id={tweet.postID} />}
     </div>
 )
 TweetBox = connect(
     state => ({
-        tweetID: selectors.getTweetID(state),
+        tweet: selectors.getTweet(state),
     })
 )(TweetBox)
 
