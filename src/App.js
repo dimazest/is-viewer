@@ -56,16 +56,28 @@ Navigation = connect(
     })
 )(Navigation)
 
-const CategoryGroup = ({categoryGroup}) => (
+let CategoryGroup = ({categoryGroup, tweet}) => (
     <div className="card mb-4" style={{minWidth: "200px"}}>
         <div className="card-header">
             <h5>{categoryGroup.title}</h5>
         </div>
         <ul className="list-group list-group-flush">
-            {categoryGroup.categories.map((i) =><li className="list-group-item" key={i.id}>{i.title}</li>)}
+            {categoryGroup.categories.map((i) => (
+                <li
+                    className={'list-group-item ' + (tweet.categories && tweet.categories.has(i.id) ? 'text-white bg-primary ' : '')}
+                    key={i.id}
+                >
+                    {i.title}
+                </li>)
+            )}
         </ul>
     </div>
 )
+CategoryGroup = connect(
+    state => ({
+        tweet: selectors.getTweet(state),
+    })
+)(CategoryGroup)
 
 let Categories = ({categoryGroups}) => (
     <div className="container-fluid">
@@ -92,7 +104,7 @@ let Categories = ({categoryGroups}) => (
 )
 Categories = connect(
     state => ({
-        categoryGroups: state.categoryGroups
+        categoryGroups: state.categoryGroups,
     })
 )(Categories)
 

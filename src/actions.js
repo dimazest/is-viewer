@@ -26,7 +26,13 @@ export const fetchAnnotation = annotationID => (
                 annotationID,
                 {
                     ...j,
-                    events: new Map(j.events.map(v => [v.eventid, v])),
+                    events: new Map(j.events.map(v => [
+                        v.eventid,
+                        {
+                            ...v,
+                            tweets: v.tweets.map(t => ({...t, categories: new Set(t.categories)}))
+                        }
+                    ])),
                     annotator: {
                         ...j.annotator,
                         eventsAnnotated: new Map(j.annotator.eventsAnnotated.map(v => [v.identifier, v])),
