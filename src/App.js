@@ -13,6 +13,7 @@ import objectPath from 'object-path'
 import TweetEmbed from './tweet-embed'
 
 import * as actions from './actions'
+import * as selectors from './selectors'
 
 const Select = ({title, onChange, value, values}) => (
     <div className="input-group input-group-sm mr-2">
@@ -26,10 +27,8 @@ const Select = ({title, onChange, value, values}) => (
     </div>
 )
 
-let Navigation = ({annotations, onChangeAnnotation, annotationID, eventID, onChangeEvent}) => {
-    const eventsAnnotated = [...objectPath.get(annotations, [annotationID, 'payload', 'annotator', 'eventsAnnotated'], [])].map(([k, v]) => [v.identifier, v.name])
-
-    return <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent}) => (
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <span className="navbar-brand h1 mb-0">Incident Streams</span>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,20 +37,21 @@ let Navigation = ({annotations, onChangeAnnotation, annotationID, eventID, onCha
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <form className="form-inline">
-                <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={Object.entries(annotations).map(([key, {title}]) => [key, title])} />
-                {eventsAnnotated && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotated} />}
+                <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={annotationsIDTitleItems} />
+                {eventsAnnotatedIdentifierNameItems && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotatedIdentifierNameItems} />}
             </form>
         </div>
     </nav>
-}
+)
 Navigation = connect(
     state => ({
-        annotations: state.annotations,
+        eventsAnnotatedIdentifierNameItems: selectors.getEventsAnnotatedIdentifierNameItems(state),
+        annotationsIDTitleItems: selectors.getAnnotationsIDTitleItems(state),
         annotationID: state.ui.annotationID,
         eventID: state.ui.eventIDbyAnnotationID[state.ui.annotationID],
     }),
     dispatch => ({
-        onChangeAnnotation: (annotationID) => dispatch(actions.annotationSelected(annotationID)),
+        onChangeAnnotation: annotationID => dispatch(actions.annotationSelected(annotationID)),
         onChangeEvent: (annotationID, eventID) => dispatch(actions.eventSelected(annotationID, eventID)),
     })
 )(Navigation)
@@ -96,34 +96,24 @@ const Categories = () => (
     </div>
 )
 
-let EventDescription = ({annotationID, eventID, annotations}) => {
-    const eventInfo = objectPath.get(annotations, [annotationID, 'payload', 'annotator', 'eventsAnnotated'], new Map()).get(eventID)
-
-    return (<div>
+let EventDescription = ({eventInfo}) => (
+    <div>
         <h5 className="mt-5">Event description</h5>
         <p dangerouslySetInnerHTML={{__html: objectPath.get(eventInfo, 'description')}} />
-    </div>)
-}
+    </div>
+)
 EventDescription = connect(
-    state => ({
-        annotationID: state.ui.annotationID,
-        eventID: state.ui.eventIDbyAnnotationID[state.ui.annotationID],
-        annotations: state.annotations,
-    })
+    state => ({eventInfo: selectors.getEventInfo(state)})
 )(EventDescription)
 
-let TweetBox = ({annotationID, eventID, annotations}) => {
-    const tweets = (objectPath.get(annotations, [annotationID, 'payload', 'events'], new Map()).get(eventID) || {}).tweets || [{}]
-    const tweetID = (tweets[0] || {}).postID
-    return <div key={`tweet-${tweetID}`}>
+let TweetBox = ({tweetID}) => (
+    <div key={`tweet-${tweetID}`}>
         {tweetID && <TweetEmbed id={tweetID} />}
     </div>
-}
+)
 TweetBox = connect(
     state => ({
-        annotationID: state.ui.annotationID,
-        eventID: state.ui.eventIDbyAnnotationID[state.ui.annotationID],
-        annotations: state.annotations,
+        tweetID: selectors.getTweetID(state),
     })
 )(TweetBox)
 
