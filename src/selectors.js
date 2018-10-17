@@ -23,7 +23,6 @@ export const getAnnotationsIDTitleItems = createSelector(
     annotations => Object.entries(annotations).map(([key, {title}]) => [key, title])
 )
 
-// const tweets = (.get(eventID) || {}).tweets || [{}]
 export const getTweets = createSelector(
     [getEvents, getEventID],
     (events, eventID) => (events.get(eventID) || {}).tweets || [{}]
