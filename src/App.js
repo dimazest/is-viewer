@@ -87,7 +87,7 @@ let CategoryGroup = ({categoryGroup, tweet}) => (
         <ul className="list-group list-group-flush">
             {categoryGroup.categories.map((i) => (
                 <li
-                    className={'list-group-item ' + (tweet.categories && tweet.categories.has(i.id) ? 'text-white bg-primary ' : '')}
+                    className={'list-group-item ' + (tweet.categories && tweet.categories.has(i.id) ? 'text-white bg-secondary ' : '')}
                     key={i.id}
                 >
                     {i.title}
