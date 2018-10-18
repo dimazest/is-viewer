@@ -36,7 +36,7 @@ export const getTweetIndex = state => {
     const tweetIndex = objectPath.get(state, ['ui', 'byAnnotation', annotationID, 'byEvent', eventID], {}).tweetIndex || 0
     return {
         hasPrevious: tweetIndex > 0,
-        hasNext: tweetIndex < tweets.length,
+        hasNext: tweetIndex < tweets.length - 1,
         total: tweets.length,
         tweetIndex,
     }

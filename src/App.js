@@ -47,21 +47,45 @@ TweetNavigation = connect(
     })
 )(TweetNavigation)
 
+let TweetSlider = ({tweetIndex, onChange, annotationID, eventID}) => (
+    <div className="mx-auto w-25">
+        <input type="range" className="custom-range"
+            min="0" max={`${tweetIndex.total - 1}`}
+            value={`${tweetIndex.tweetIndex}`}
+            onChange={e => onChange(annotationID, eventID, parseInt(e.target.value))}
+        />
+    </div>
+)
+TweetSlider = connect(
+    state => ({
+        tweetIndex: selectors.getTweetIndex(state),
+        annotationID: selectors.getAnnotationID(state),
+        eventID: selectors.getEventID(state),
+
+    }),
+    dispatch => ({
+        onChange: ((annotationID, eventID, index) => dispatch(actions.setTweet(annotationID, eventID, index)))
+    })
+)(TweetSlider)
+
 let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent}) => (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <span className="navbar-brand h1 mb-0">IS</span>
 
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsableContent">
             <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <form className="form-inline">
-                <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={annotationsIDTitleItems} />
-                {eventsAnnotatedIdentifierNameItems && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotatedIdentifierNameItems} />}
-            </form>
+        <div>
+            <div className="collapse navbar-collapse" id="collapsableContent">
+                <form className="form-inline">
+                    <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={annotationsIDTitleItems} />
+                    {eventsAnnotatedIdentifierNameItems && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotatedIdentifierNameItems} />}
+                </form>
+            </div>
         </div>
 
+        <TweetSlider />
         <TweetNavigation />
 
     </nav>

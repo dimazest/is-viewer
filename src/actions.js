@@ -53,3 +53,9 @@ export const advanceTweet = (annotationID, eventID, by=1) => ({
     type: ADVANCE_TWEET,
     annotationID, eventID, by,
 })
+
+export const SET_TWEET = 'SET_TWEET'
+export const setTweet = (annotationID, eventID, index) => ({
+    type: SET_TWEET,
+    annotationID, eventID, index,
+})

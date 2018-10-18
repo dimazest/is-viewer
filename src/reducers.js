@@ -39,6 +39,26 @@ export const ui = (state = {}, action) => {
             }
         }
     }
+    case actions.SET_TWEET: {
+        const byEvent = {
+            ...(state.byAnnotation[action.annotationID].byEvent || {})
+        }
+        byEvent[action.eventID] = {
+            ...byEvent[action.eventID],
+            tweetIndex: action.index
+        }
+
+        return {
+            ...state,
+            byAnnotation: {
+                ...state.byAnnotation,
+                [action.annotationID]: {
+                    ...state.byAnnotation[action.annotationID],
+                    byEvent,
+                },
+            }
+        }
+    }
     default: {
         return state
     }}
