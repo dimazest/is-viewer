@@ -3,8 +3,10 @@ import objectPath from 'object-path'
 
 export const getEventsMetadata = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'annotator', 'eventsAnnotated'], new Map())
 export const getAnnotationID = ({ui}) => ui.annotationID
-export const getEventID = ({ui}) => ui.byAnnotation[ui.annotationID].eventID
-export const getAnnotations = state => state.annotations
+export const getAnnotations = ({annotations}) => annotations
+export const getAnnotation = state => objectPath.get(getAnnotations(state), [getAnnotationID(state)], {})
+export const getEventID = ({ui}) => objectPath.get(ui, ['byAnnotation', ui.annotationID, 'eventID'])
+export const getRunURL = ({ui}) => objectPath.get(ui, ['byAnnotation', ui.annotationID, 'runURL'])
 export const getEvents = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'events'], new Map())
 
 export const getEventInfo = state => {
@@ -42,4 +44,7 @@ export const getTweetIndex = state => {
     }
 }
 
-export const getTweet = (state) => getTweets(state)[getTweetIndex(state).tweetIndex] || {}
+export const getTweet = state => getTweets(state)[getTweetIndex(state).tweetIndex] || {}
+
+export const getTopicID = state => getAnnotation(state).datasetTopicMapping[getEventID(state)]
+export const getRunURLTitleItems = state => getAnnotation(state).runs.map(({url, title}) => [url, title])

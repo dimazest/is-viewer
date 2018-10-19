@@ -15,16 +15,186 @@
                 assr4: {
                     url: '%PUBLIC_URL%/data/assr4.json',
                     title: 'NIST Sample',
-                },
-                TEA: {
-                    url: '%PUBLIC_URL%/data/TRECIS-CTIT-H-Training.json',
-                    title: 'Glasgow Training',
+                    datasetTopicMapping: {
+                        guatemalaEarthquake2012: 'TRECIS-CTIT-H-Test-007',
+                        italyEarthquakes2012: 'TRECIS-CTIT-H-Test-008',
+                        philipinnesFloods2012: 'TRECIS-CTIT-H-Test-009',
+                        albertaFloods2013: 'TRECIS-CTIT-H-Test-010',
+                        australiaBushfire2013: 'TRECIS-CTIT-H-Test-011',
+                        bostonBombings2013: 'TRECIS-CTIT-H-Test-012',
+                        manilaFloods2013: 'TRECIS-CTIT-H-Test-013',
+                        queenslandFloods2013: 'TRECIS-CTIT-H-Test-014',
+                        typhoonYolanda2013: 'TRECIS-CTIT-H-Test-015',
+                        joplinTornado2011: 'TRECIS-CTIT-H-Test-016',
+                        chileEarthquake2014: 'TRECIS-CTIT-H-Test-017',
+                        typhoonHagupit2014: 'TRECIS-CTIT-H-Test-018',
+                        nepalEarthquake2015: 'TRECIS-CTIT-H-Test-019',
+                        flSchoolShooting2018: 'TRECIS-CTIT-H-Test-020',
+                        parisAttacks2015: 'TRECIS-CTIT-H-Test-021',
+                    },
+                    runs: [
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/DLR_Baseline.gz',
+                            title: 'DLR_Baseline',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/DLR_Augmented.gz',
+                            title: 'DLR_Augmented',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/DLR_Simple_CNN.gz',
+                            title: 'DLR_Simple_CNN',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/DLR_Fusion.gz',
+                            title: 'DLR_Fusion',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/IITBHU1.gz',
+                            title: 'IITBHU1',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/IITBHU12.gz',
+                            title: 'IITBHU12',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/KDEIS1_CLSTM.gz',
+                            title: 'KDEIS1_CLSTM',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/KDEIS2_ACBLSTM.gz',
+                            title: 'KDEIS2_ACBLSTM',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/KDEIS3_ACSBLSTM.gz',
+                            title: 'KDEIS3_ACSBLSTM',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/KDEIS4_DM.gz',
+                            title: 'KDEIS4_DM',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/NHK_run1.gz',
+                            title: 'NHK_run1',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/NHK_run2.gz',
+                            title: 'NHK_run2',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/NHK_run3.gz',
+                            title: 'NHK_run3',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/NHK_run4.gz',
+                            title: 'NHK_run4',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/SINAI_run1.gz',
+                            title: 'SINAI_run1',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/SINAI_run2.gz',
+                            title: 'SINAI_run2',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/SINAI_run3.gz',
+                            title: 'SINAI_run3',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/SINAI_run4.gz',
+                            title: 'SINAI_run4',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/UPB_DICE1.gz',
+                            title: 'UPB_DICE1',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/UPB_DICE2.gz',
+                            title: 'UPB_DICE2',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/UPB_DICE3.gz',
+                            title: 'UPB_DICE3',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/UPB_DICE4.gz',
+                            title: 'UPB_DICE4',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/cbnuC1.gz',
+                            title: 'cbnuC1',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/cbnuC2.gz',
+                            title: 'cbnuC2',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/cbnuS1.gz',
+                            title: 'cbnuS1',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/cbnuS2.gz',
+                            title: 'cbnuS2',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/myrun1.gz',
+                            title: 'myrun1',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/myrun2.gz',
+                            title: 'myrun2',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/myrun-2.gz',
+                            title: 'myrun-2',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/myrun-10.gz',
+                            title: 'myrun-10',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/myrun-11.gz',
+                            title: 'myrun-11',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/myrun-21.gz',
+                            title: 'myrun-21',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/umdhcilbaseline.gz',
+                            title: 'umdhcilbaseline',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/umdhcilfasttext.gz',
+                            title: 'umdhcilfasttext',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/umdhcilfts.gz',
+                            title: 'umdhcilfts',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/umdhcilspread.gz',
+                            title: 'umdhcilspread',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/uogTr.R1.asp.gz',
+                            title: 'uogTr.R1.asp',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/uogTr.R2.asp.gz',
+                            title: 'uogTr.R2.asp',
+                        },
+                        {
+                            url: '%PUBLIC_URL%/data/results/2018/uogTr.R3.asp.gz',
+                            title: 'uogTr.R3.asp',
+                        },
+                    ],
                 },
            },
            ui: {
                annotationID: 'assr4',
                byAnnotation: {
-                   TEA: {eventID: 'costaRicaEarthquake2012'},
                    assr4: {eventID: 'manilaFloods2013'},
                },
            },

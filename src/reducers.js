@@ -19,6 +19,18 @@ export const ui = (state = {}, action) => {
             }
         }
     }
+    case actions.RUN_SELECTED: {
+        return {
+            ...state,
+            byAnnotation: {
+                ...state.byAnnotation,
+                [action.annotationID]: {
+                    ...state.byAnnotation[action.annotationID],
+                    runURL: action.runURL,
+                },
+            }
+        }
+    }
     case actions.ADVANCE_TWEET: {
         const byEvent = {
             ...(state.byAnnotation[action.annotationID].byEvent || {})

@@ -68,7 +68,7 @@ TweetSlider = connect(
     })
 )(TweetSlider)
 
-let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent}) => (
+let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent, runURLTitleItems, onChangeRun, runURL}) => (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <span className="navbar-brand h1 mb-0">IS</span>
 
@@ -79,8 +79,9 @@ let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, 
         <div>
             <div className="collapse navbar-collapse" id="collapsableContent">
                 <form className="form-inline">
-                    <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={annotationsIDTitleItems} />
+                    {false && <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={annotationsIDTitleItems} />}
                     {eventsAnnotatedIdentifierNameItems && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotatedIdentifierNameItems} />}
+                    {eventsAnnotatedIdentifierNameItems && <Select title="Run" onChange={runURL => onChangeRun(annotationID, runURL)} value={runURL} values={[[null, ''], ...runURLTitleItems]} />}
                 </form>
             </div>
         </div>
@@ -96,10 +97,13 @@ Navigation = connect(
         annotationsIDTitleItems: selectors.getAnnotationsIDTitleItems(state),
         annotationID: state.ui.annotationID,
         eventID: selectors.getEventID(state),
+        runURLTitleItems: selectors.getRunURLTitleItems(state),
+        runURL: selectors.getRunURL(state),
     }),
     dispatch => ({
         onChangeAnnotation: annotationID => dispatch(actions.annotationSelected(annotationID)),
         onChangeEvent: (annotationID, eventID) => dispatch(actions.eventSelected(annotationID, eventID)),
+        onChangeRun: (annotationID, runURL) => dispatch(actions.runSelected(annotationID, runURL)),
     })
 )(Navigation)
 
@@ -113,10 +117,8 @@ let CategoryGroup = ({categoryGroup, tweet}) => (
                 <li
                     className={'list-group-item ' + (tweet.categories && tweet.categories.has(i.id) ? 'text-white bg-secondary ' : '')}
                     key={i.id}
-                >
-                    {i.title}
-                </li>)
-            )}
+                >{i.title}</li>
+            ))}
         </ul>
     </div>
 )

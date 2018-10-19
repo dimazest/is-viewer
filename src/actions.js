@@ -59,3 +59,9 @@ export const setTweet = (annotationID, eventID, index) => ({
     type: SET_TWEET,
     annotationID, eventID, index,
 })
+
+export const RUN_SELECTED = 'RUN_SELECTED'
+export const runSelected = (annotationID, runURL) => ({
+    type: RUN_SELECTED,
+    annotationID, runURL,
+})
