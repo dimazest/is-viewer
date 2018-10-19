@@ -68,7 +68,7 @@ TweetSlider = connect(
     })
 )(TweetSlider)
 
-let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent, runURLTitleItems, onChangeRun, runURL}) => (
+let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent, runIDTitleItems, onChangeRun, runID}) => (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <span className="navbar-brand h1 mb-0">IS</span>
 
@@ -81,7 +81,7 @@ let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, 
                 <form className="form-inline">
                     {false && <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={annotationsIDTitleItems} />}
                     {eventsAnnotatedIdentifierNameItems && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotatedIdentifierNameItems} />}
-                    {eventsAnnotatedIdentifierNameItems && <Select title="Run" onChange={runURL => onChangeRun(annotationID, runURL)} value={runURL} values={[[null, ''], ...runURLTitleItems]} />}
+                    {eventsAnnotatedIdentifierNameItems && <Select title="Run" onChange={runID => onChangeRun(annotationID, runID)} value={runID} values={[[null, ''], ...runIDTitleItems]} />}
                 </form>
             </div>
         </div>
@@ -97,8 +97,8 @@ Navigation = connect(
         annotationsIDTitleItems: selectors.getAnnotationsIDTitleItems(state),
         annotationID: state.ui.annotationID,
         eventID: selectors.getEventID(state),
-        runURLTitleItems: selectors.getRunURLTitleItems(state),
-        runURL: selectors.getRunURL(state),
+        runIDTitleItems: selectors.getRunIDTitleItems(state),
+        runID: selectors.getRunID(state),
     }),
     dispatch => ({
         onChangeAnnotation: annotationID => dispatch(actions.annotationSelected(annotationID)),
@@ -107,24 +107,40 @@ Navigation = connect(
     })
 )(Navigation)
 
-let CategoryGroup = ({categoryGroup, tweet}) => (
+let CategoryGroup = ({categoryGroup, tweet, runTweetCategories}) => (
     <div className="card mb-4" style={{minWidth: "200px"}}>
         <div className="card-header">
             <h5>{categoryGroup.title}</h5>
         </div>
+
         <ul className="list-group list-group-flush">
-            {categoryGroup.categories.map((i) => (
-                <li
-                    className={'list-group-item ' + (tweet.categories && tweet.categories.has(i.id) ? 'text-white bg-secondary ' : '')}
+            {categoryGroup.categories.map((i) => {
+                let itemHighlight = tweet.categories && tweet.categories.has(i.id)
+                let badgeHighlight = null
+                if (runTweetCategories) {
+                    itemHighlight = runTweetCategories.has(i.id)
+                    badgeHighlight = tweet.categories && tweet.categories.has(i.id)
+                }
+
+                return <li
+                    className={'list-group-item ' + (itemHighlight ? 'text-white bg-secondary ' : '')}
                     key={i.id}
-                >{i.title}</li>
-            ))}
+                >
+                    {i.title}
+                    {badgeHighlight !== null && !(!badgeHighlight  && !itemHighlight)  &&
+                        <span className={"badge float-right mr-2 " + (badgeHighlight === itemHighlight ? 'badge-success ' : 'badge-danger')}>
+                            {badgeHighlight === itemHighlight ? 'Correct' : 'Incorrect'}
+                        </span>
+                    }
+                </li>
+            })}
         </ul>
     </div>
 )
 CategoryGroup = connect(
     state => ({
         tweet: selectors.getTweet(state),
+        runTweetCategories: selectors.getRunTweetCategories(state),
     })
 )(CategoryGroup)
 

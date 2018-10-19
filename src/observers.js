@@ -5,15 +5,15 @@ import * as selectors from './selectors'
 
 const annotationObserver = observer(
   state => state.ui.annotationID,
-  (dispatch, current, previous) => {
-      dispatch(actions.fetchAnnotation(current))
+  (dispatch, annotationID, previous) => {
+      dispatch(actions.fetchAnnotation(annotationID))
   }
 )
 
 const eventAnnotationObserver = observer(
     state => ({
-        annotationID: state.ui.annotationID,
-        annotation: state.annotations[state.ui.annotationID],
+        annotationID: selectors.getAnnotationID(state),
+        annotation: selectors.getAnnotation(state),
         eventID: selectors.getEventID(state),
     }),
     (dispatch, {annotationID, annotation, eventID}, previous) => {
@@ -23,5 +23,16 @@ const eventAnnotationObserver = observer(
     }
 )
 
+const runObserver = observer(
+    state => ({
+        annotationID: selectors.getAnnotationID(state),
+        runID: selectors.getRunID(state),
+        runURL: selectors.getRun(state).url,
 
-export default [annotationObserver, eventAnnotationObserver]
+    }),
+    (dispatch, {annotationID, runID, runURL}, previous) => {
+        dispatch(actions.fetchRun(annotationID, runID, runURL))
+    }
+)
+
+export default [annotationObserver, eventAnnotationObserver, runObserver]

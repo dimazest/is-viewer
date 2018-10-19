@@ -26,7 +26,7 @@ export const ui = (state = {}, action) => {
                 ...state.byAnnotation,
                 [action.annotationID]: {
                     ...state.byAnnotation[action.annotationID],
-                    runURL: action.runURL,
+                    runID: action.runID,
                 },
             }
         }
@@ -86,6 +86,21 @@ export const annotations = (state = {}, action) => {
                 payload: action.payload,
             }
         }}
+    case actions.RUN_RECEIVED: {
+        return {
+            ...state,
+            [action.annotationID]: {
+                ...state[action.annotationID],
+                runs: {
+                    ...state[action.annotationID].runs,
+                    [action.runID]: {
+                        ...state[action.annotationID].runs[action.runID],
+                        payload: action.payload,
+                    }
+                }
+            }
+        }
+    }
     default: {
         return state
     }}

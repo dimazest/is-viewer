@@ -6,7 +6,7 @@ export const getAnnotationID = ({ui}) => ui.annotationID
 export const getAnnotations = ({annotations}) => annotations
 export const getAnnotation = state => objectPath.get(getAnnotations(state), [getAnnotationID(state)], {})
 export const getEventID = ({ui}) => objectPath.get(ui, ['byAnnotation', ui.annotationID, 'eventID'])
-export const getRunURL = ({ui}) => objectPath.get(ui, ['byAnnotation', ui.annotationID, 'runURL'])
+export const getRunID = ({ui}) => objectPath.get(ui, ['byAnnotation', ui.annotationID, 'runID'])
 export const getEvents = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'events'], new Map())
 
 export const getEventInfo = state => {
@@ -47,4 +47,11 @@ export const getTweetIndex = state => {
 export const getTweet = state => getTweets(state)[getTweetIndex(state).tweetIndex] || {}
 
 export const getTopicID = state => getAnnotation(state).datasetTopicMapping[getEventID(state)]
-export const getRunURLTitleItems = state => getAnnotation(state).runs.map(({url, title}) => [url, title])
+export const getRunIDTitleItems = state => Object.entries(getAnnotation(state).runs).map(([i, {url, title}]) => [i, title])
+export const getRun = state => getAnnotation(state).runs[getRunID(state)] || {'a': 1}
+export const getRunTweetCategories = state => {
+    const annotation = getAnnotation(state)
+    const topic = annotation.datasetTopicMapping[getEventID(state)]
+
+    return ((getRun(state).payload || {})[topic] || {})[getTweet(state).postID]
+}

@@ -1,6 +1,5 @@
 import objectPath from 'object-path'
 
-
 export const ANNOTATION_SELECTED = 'ANNOTATION_SELECTED'
 export const annotationSelected = (annotationID) => ({
         type: ANNOTATION_SELECTED,
@@ -61,7 +60,50 @@ export const setTweet = (annotationID, eventID, index) => ({
 })
 
 export const RUN_SELECTED = 'RUN_SELECTED'
-export const runSelected = (annotationID, runURL) => ({
+export const runSelected = (annotationID, runID) => ({
     type: RUN_SELECTED,
-    annotationID, runURL,
+    annotationID, runID,
 })
+
+export const RUN_RECEIVED = 'RUN_RECEIVED'
+export const runReceived = (annotationID, runID, payload) => ({
+    type: RUN_RECEIVED,
+    annotationID, runID, payload,
+})
+
+export const fetchRun = (annotationID, runID, runURL) => (
+    (dispatch, getState) => {
+        return fetch(runURL)
+            .then(r => r.text())
+            .then(t => {
+                const result = {}
+                for (let l of t.split('\n')) {
+                    if (l === '') {
+                        continue
+                    }
+
+                    const v = l.split(/\s+/)
+
+                    if (v.length < 7 ) {
+                        console.log(v)
+                        console.log(`Could not read line in ${runURL}: ${l}`)
+                        break
+                    }
+
+                    const topic = v[0]
+                    const tweetID = v[2]
+                    const category = v[5].split('-')[1]
+
+                    if (!result[topic]) {
+                        result[topic] = {}
+                    }
+                    if (!result[topic][tweetID]) {
+                        result[topic][tweetID] = new Set()
+                    }
+
+                    result[topic][tweetID].add(category)
+                }
+                dispatch(runReceived(annotationID, runID, result))
+            })
+    }
+)
