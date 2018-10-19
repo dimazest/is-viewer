@@ -1,1 +1,236 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="shortcut icon" href="/is-viewer/favicon.ico"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="manifest" href="/is-viewer/manifest.json"><title>Incident Streams Viewer</title><link href="/is-viewer/static/css/1.0cbab034.chunk.css" rel="stylesheet"><link href="/is-viewer/static/css/main.28bb4b3d.chunk.css" rel="stylesheet"></head><body><script>window._state={annotations:{assr4:{url:"/is-viewer/data/assr4.json",title:"NIST Sample"},TEA:{url:"/is-viewer/data/TRECIS-CTIT-H-Training.json",title:"Glasgow Training"}},ui:{annotationID:"assr4",byAnnotation:{TEA:{eventID:"costaRicaEarthquake2012"},assr4:{eventID:"manilaFloods2013"}}},categoryGroups:{request:{title:"Request",categories:[{title:"Goods and Services",id:"GoodsServices"},{title:"Search and Rescue",id:"SearchAndRescue"},{title:"Information Wanted",id:"InformationWanted"}]},callToAction:{title:"Call to Action",categories:[{title:"Volunteer",id:"Volunteer"},{title:"Donations",id:"Donations"},{title:"Move People",id:"MovePeople"}]},report:{title:"Report",categories:[{title:"First Party Observation",id:"FirstPartyObservation"},{title:"Third Party Observation",id:"ThirdPartyObservation"},{title:"Weather",id:"Weather"},{title:"Emerging Threats",id:"EmergingThreats"},{title:"Significant Event Change",id:"SignificantEventChange"},{title:"Multimedia Share",id:"MultimediaShare"},{title:"Service Available",id:"ServiceAvailable"},{title:"Factoid",id:"Factoid"},{title:"Official",id:"Official"},{title:"Clean up",id:"CleanUp"},{title:"Hashtags",id:"Hashtags"}]},other:{title:"Other",categories:[{title:"Past News",id:"PastNews"},{title:"Continuing News",id:"ContinuingNews"},{title:"Advice",id:"Advice"},{title:"Sentiment",id:"Sentiment"},{title:"Discussion",id:"Discussion"},{title:"Irrelevant",id:"Irrelevant"},{title:"Unknown",id:"Unknown"},{title:"Known already",id:"KnownAlready"}]}}}</script><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script>!function(l){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,f=[];i<n.length;i++)t=n[i],p[t]&&f.push(p[t][0]),p[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(l[r]=o[r]);for(s&&s(e);f.length;)f.shift()();return c.push.apply(c,u||[]),a()}function a(){for(var e,r=0;r<c.length;r++){for(var t=c[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==p[u]&&(n=!1)}n&&(c.splice(r--,1),e=i(i.s=t[0]))}return e}var t={},p={2:0},c=[];function i(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return l[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=l,i.c=t,i.d=function(e,r,t){i.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(r,e){if(1&e&&(r=i(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(i.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)i.d(t,n,function(e){return r[e]}.bind(null,n));return t},i.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(r,"a",r),r},i.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},i.p="/is-viewer/";var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;a()}([])</script><script src="/is-viewer/static/js/1.828f170c.chunk.js"></script><script src="/is-viewer/static/js/main.196a4890.chunk.js"></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="shortcut icon" href="/is-viewer/favicon.ico"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="manifest" href="/is-viewer/manifest.json"><title>Incident Streams Viewer</title><link href="/is-viewer/static/css/1.0cbab034.chunk.css" rel="stylesheet"><link href="/is-viewer/static/css/main.28bb4b3d.chunk.css" rel="stylesheet"></head><body><script>window._state = {
+            annotations: {
+                assr4: {
+                    url: '/is-viewer/data/assr4.json',
+                    title: 'NIST Sample',
+                    datasetTopicMapping: {
+                        guatemalaEarthquake2012: 'TRECIS-CTIT-H-Test-007',
+                        italyEarthquakes2012: 'TRECIS-CTIT-H-Test-008',
+                        philipinnesFloods2012: 'TRECIS-CTIT-H-Test-009',
+                        albertaFloods2013: 'TRECIS-CTIT-H-Test-010',
+                        australiaBushfire2013: 'TRECIS-CTIT-H-Test-011',
+                        bostonBombings2013: 'TRECIS-CTIT-H-Test-012',
+                        manilaFloods2013: 'TRECIS-CTIT-H-Test-013',
+                        queenslandFloods2013: 'TRECIS-CTIT-H-Test-014',
+                        typhoonYolanda2013: 'TRECIS-CTIT-H-Test-015',
+                        joplinTornado2011: 'TRECIS-CTIT-H-Test-016',
+                        chileEarthquake2014: 'TRECIS-CTIT-H-Test-017',
+                        typhoonHagupit2014: 'TRECIS-CTIT-H-Test-018',
+                        nepalEarthquake2015: 'TRECIS-CTIT-H-Test-019',
+                        flSchoolShooting2018: 'TRECIS-CTIT-H-Test-020',
+                        parisAttacks2015: 'TRECIS-CTIT-H-Test-021',
+                    },
+                    runs: {...[
+                        {
+                            url: '/is-viewer/data/results/2018/DLR_Baseline',
+                            title: 'DLR_Baseline',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/DLR_Augmented',
+                            title: 'DLR_Augmented',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/DLR_Simple_CNN',
+                            title: 'DLR_Simple_CNN',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/DLR_Fusion',
+                            title: 'DLR_Fusion',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/IITBHU1',
+                            title: 'IITBHU1',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/IITBHU12',
+                            title: 'IITBHU12',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/KDEIS1_CLSTM',
+                            title: 'KDEIS1_CLSTM',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/KDEIS2_ACBLSTM',
+                            title: 'KDEIS2_ACBLSTM',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/KDEIS3_ACSBLSTM',
+                            title: 'KDEIS3_ACSBLSTM',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/KDEIS4_DM',
+                            title: 'KDEIS4_DM',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/NHK_run1',
+                            title: 'NHK_run1',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/NHK_run2',
+                            title: 'NHK_run2',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/NHK_run3',
+                            title: 'NHK_run3',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/NHK_run4',
+                            title: 'NHK_run4',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/SINAI_run1',
+                            title: 'SINAI_run1',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/SINAI_run2',
+                            title: 'SINAI_run2',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/SINAI_run3',
+                            title: 'SINAI_run3',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/SINAI_run4',
+                            title: 'SINAI_run4',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/UPB_DICE1',
+                            title: 'UPB_DICE1',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/UPB_DICE2',
+                            title: 'UPB_DICE2',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/UPB_DICE3',
+                            title: 'UPB_DICE3',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/UPB_DICE4',
+                            title: 'UPB_DICE4',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/cbnuC1',
+                            title: 'cbnuC1',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/cbnuC2',
+                            title: 'cbnuC2',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/cbnuS1',
+                            title: 'cbnuS1',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/cbnuS2',
+                            title: 'cbnuS2',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/myrun1',
+                            title: 'myrun1',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/myrun2',
+                            title: 'myrun2',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/myrun-2',
+                            title: 'myrun-2',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/myrun-10',
+                            title: 'myrun-10',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/myrun-11',
+                            title: 'myrun-11',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/myrun-21',
+                            title: 'myrun-21',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/umdhcilbaseline',
+                            title: 'umdhcilbaseline',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/umdhcilfasttext',
+                            title: 'umdhcilfasttext',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/umdhcilfts',
+                            title: 'umdhcilfts',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/umdhcilspread',
+                            title: 'umdhcilspread',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/uogTr.R1.asp',
+                            title: 'uogTr.R1.asp',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/uogTr.R2.asp',
+                            title: 'uogTr.R2.asp',
+                        },
+                        {
+                            url: '/is-viewer/data/results/2018/uogTr.R3.asp',
+                            title: 'uogTr.R3.asp',
+                        },
+                    ]},
+                },
+           },
+           ui: {
+               annotationID: 'assr4',
+               byAnnotation: {
+                   assr4: {eventID: 'manilaFloods2013'},
+               },
+           },
+           categoryGroups: {
+               request: {
+                   title: 'Request',
+                   categories: [
+                       {title: 'Goods and Services', id: 'GoodsServices'},
+                       {title: 'Search and Rescue', id: 'SearchAndRescue'},
+                       {title: 'Information Wanted', id: 'InformationWanted'},
+                   ],
+               },
+               callToAction: {
+                   title: 'Call to Action',
+                   categories: [
+                       {title: 'Volunteer', id: 'Volunteer'},
+                       {title: 'Donations', id: 'Donations'},
+                       {title: 'Move People', id: 'MovePeople'},
+                   ],
+               },
+               report: {
+                   title: 'Report',
+                   categories: [
+                       {title: 'First Party Observation', id: 'FirstPartyObservation'},
+                       {title: 'Third Party Observation', id: 'ThirdPartyObservation'},
+                       {title: 'Weather', id: 'Weather'},
+                       {title: 'Emerging Threats', id: 'EmergingThreats'},
+                       {title: 'Significant Event Change', id: 'SignificantEventChange'},
+                       {title: 'Multimedia Share', id: 'MultimediaShare'},
+                       {title: 'Service Available', id: 'ServiceAvailable'},
+                       {title: 'Factoid', id: 'Factoid'},
+                       {title: 'Official', id: 'Official'},
+                       {title: 'Clean up', id: 'CleanUp'},
+                       {title: 'Hashtags', id: 'Hashtags'},
+                 ],
+               },
+               other: {
+                   title: 'Other',
+                   categories: [
+                       {title: 'Past News', id: 'PastNews'},
+                       {title: 'Continuing News', id: 'ContinuingNews'},
+                       {title: 'Advice', id: 'Advice'},
+                       {title: 'Sentiment', id: 'Sentiment'},
+                       {title: 'Discussion', id: 'Discussion'},
+                       {title: 'Irrelevant', id: 'Irrelevant'},
+                       {title: 'Unknown', id: 'Unknown'},
+                       {title: 'Known already', id: 'KnownAlready'},
+                     ]
+                 }
+           }
+        }</script><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script>!function(l){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,f=[];i<n.length;i++)t=n[i],p[t]&&f.push(p[t][0]),p[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(l[r]=o[r]);for(s&&s(e);f.length;)f.shift()();return c.push.apply(c,u||[]),a()}function a(){for(var e,r=0;r<c.length;r++){for(var t=c[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==p[u]&&(n=!1)}n&&(c.splice(r--,1),e=i(i.s=t[0]))}return e}var t={},p={2:0},c=[];function i(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return l[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=l,i.c=t,i.d=function(e,r,t){i.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(r,e){if(1&e&&(r=i(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(i.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)i.d(t,n,function(e){return r[e]}.bind(null,n));return t},i.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(r,"a",r),r},i.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},i.p="/is-viewer/";var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;a()}([])</script><script src="/is-viewer/static/js/1.9a36feb2.chunk.js"></script><script src="/is-viewer/static/js/main.634ced5a.chunk.js"></script></body></html>
