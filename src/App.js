@@ -129,7 +129,10 @@ let CategoryGroup = ({categoryGroup, tweet, runTweetCategories}) => (
                     {i.title}
                     {badgeHighlight !== null && !(!badgeHighlight  && !itemHighlight)  &&
                         <span className={"badge float-right mr-2 " + (badgeHighlight === itemHighlight ? 'badge-success ' : 'badge-danger')}>
-                            {badgeHighlight === itemHighlight ? 'Correct' : 'Incorrect'}
+                            {
+                                badgeHighlight === itemHighlight
+                                ? 'Correct'
+                                : (badgeHighlight? 'Missing' : 'Incorrect')}
                         </span>
                     }
                 </li>
@@ -209,12 +212,6 @@ const App = () => (
                 </div>
             </div>
         </main>
-
-        <footer className="footer">
-            <div className="container">
-                <span className="text-muted">Navigatoin trough the stream.</span>
-            </div>
-        </footer>
     </div>
 )
 
