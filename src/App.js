@@ -68,7 +68,7 @@ TweetSlider = connect(
     })
 )(TweetSlider)
 
-let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent, runIDTitleItems, onChangeRun, runID}) => (
+let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, onChangeAnnotation, annotationID, eventID, onChangeEvent, runIDTitleItems, onChangeRun, runID, currentBasicScore, lastBasicScore}) => (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <span className="navbar-brand h1 mb-0">IS</span>
 
@@ -82,6 +82,16 @@ let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, 
                     {false && <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={annotationsIDTitleItems} />}
                     {eventsAnnotatedIdentifierNameItems && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotatedIdentifierNameItems} />}
                     {eventsAnnotatedIdentifierNameItems && <Select title="Run" onChange={runID => onChangeRun(annotationID, runID)} value={runID} values={[[null, ''], ...runIDTitleItems]} />}
+                    {currentBasicScore !== null &&
+                        <div className="input-group input-group-sm mr-2">
+                          <div className="input-group-prepend">
+                            <span className="input-group-text">Current score</span>
+                          </div>
+                          <div className="input-group-append">
+                            <span className="input-group-text">{currentBasicScore} of {lastBasicScore}</span>
+                          </div>
+                        </div>
+                    }
                 </form>
             </div>
         </div>
@@ -99,6 +109,8 @@ Navigation = connect(
         eventID: selectors.getEventID(state),
         runIDTitleItems: selectors.getRunIDTitleItems(state),
         runID: selectors.getRunID(state),
+        currentBasicScore: selectors.getCurrentBasicScore(state),
+        lastBasicScore: selectors.getLastBasicScore(state),
     }),
     dispatch => ({
         onChangeAnnotation: annotationID => dispatch(actions.annotationSelected(annotationID)),
