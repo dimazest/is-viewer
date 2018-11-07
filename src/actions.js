@@ -71,6 +71,30 @@ export const runReceived = (annotationID, runID, payload) => ({
     annotationID, runID, payload,
 })
 
+export const TOGGLE_PLAYER = 'TOGGLE_PLAYER'
+export const togglePlayer = timerID => (dispatch, getState) => {
+    if (timerID === null) {
+        const tick = () => {
+            const state = getState()
+            const annotationID = state.ui.annotationID
+            const eventID = objectPath.get(state, ['ui', 'byAnnotation', annotationID, 'eventID'])
+
+            dispatch(advanceTweet(annotationID, eventID))
+
+        }
+        tick()
+        timerID = window.setInterval(tick, 4000)
+    } else {
+        window.clearInterval(timerID)
+        timerID = null
+    }
+
+    dispatch({
+        type: TOGGLE_PLAYER,
+        timerID
+    })
+}
+
 export const fetchRun = (annotationID, runID, runURL) => (
     (dispatch, getState) => {
         return fetch(runURL)

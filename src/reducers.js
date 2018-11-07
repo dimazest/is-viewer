@@ -71,6 +71,15 @@ export const ui = (state = {}, action) => {
             }
         }
     }
+    case actions.TOGGLE_PLAYER: {
+        return {
+            ...state,
+            player: {
+              ...state.player,
+              timerID: action.timerID,
+            }
+        }
+    }
     default: {
         return state
     }}

@@ -8,6 +8,7 @@ export const getAnnotation = state => objectPath.get(getAnnotations(state), [get
 export const getEventID = ({ui}) => objectPath.get(ui, ['byAnnotation', ui.annotationID, 'eventID'])
 export const getRunID = ({ui}) => objectPath.get(ui, ['byAnnotation', ui.annotationID, 'runID'])
 export const getEvents = ({annotations, ui}) => objectPath.get(annotations, [ui.annotationID, 'payload', 'events'], new Map())
+export const getPlayerTimerID = ({ui}) => ui.player.timerID
 
 export const getEventInfo = state => {
     const events = getEventsMetadata(state)

@@ -8,7 +8,6 @@ import 'open-iconic/font/css/open-iconic-bootstrap.css';
 import './App.css';
 
 import { connect } from 'react-redux'
-import objectPath from 'object-path'
 
 import TweetEmbed from './tweet-embed'
 
@@ -27,11 +26,12 @@ const Select = ({title, onChange, value, values}) => (
     </div>
 )
 
-let TweetNavigation = ({annotationID, eventID, advanceTweet, tweetIndex}) => {
+let TweetNavigation = ({annotationID, eventID, advanceTweet, tweetIndex, togglePlayer, playerTimerID}) => {
     const onClick = by => () => advanceTweet(annotationID, eventID, by)
 
     return <div className="btn-group" role="group">
       <button type="button" className={"btn " + (tweetIndex.hasPrevious ? "btn-secondary " : "btn-outline-secondary ")} onClick={tweetIndex.hasPrevious ? onClick(-1) : () => null}><span className="oi oi-media-skip-backward"></span></button>
+      <button type="button" className={"btn btn-secondary"} onClick={() => togglePlayer(playerTimerID)}><span className={"oi " + (playerTimerID !== null ? "oi-media-pause " : "oi-media-play ")}></span></button>
       <button type="button" className="btn btn-secondary">{tweetIndex.tweetIndex + 1} of {tweetIndex.total}</button>
       <button type="button" className={"btn " + (tweetIndex.hasNext ? "btn-secondary " : "btn-outline-secondary ")} onClick={tweetIndex.hasNext ? onClick(1) : () => null}><span className="oi oi-media-skip-forward"></span></button>
     </div>
@@ -41,9 +41,11 @@ TweetNavigation = connect(
         annotationID: selectors.getAnnotationID(state),
         eventID: selectors.getEventID(state),
         tweetIndex: selectors.getTweetIndex(state),
+        playerTimerID: selectors.getPlayerTimerID(state),
     }),
     dispatch => ({
-        advanceTweet: (annotationID, eventID, by) => dispatch(actions.advanceTweet(annotationID, eventID, by))
+        advanceTweet: (annotationID, eventID, by) => dispatch(actions.advanceTweet(annotationID, eventID, by)),
+        togglePlayer: (playerTimerID) => dispatch(actions.togglePlayer(playerTimerID))
     })
 )(TweetNavigation)
 
@@ -82,7 +84,7 @@ let Navigation = ({eventsAnnotatedIdentifierNameItems, annotationsIDTitleItems, 
                     {false && <Select title="Annotation" onChange={annotationID => onChangeAnnotation(annotationID)} value={annotationID} values={annotationsIDTitleItems} />}
                     {eventsAnnotatedIdentifierNameItems && <Select title="Event" onChange={eventID => onChangeEvent(annotationID, eventID)} value={eventID} values={eventsAnnotatedIdentifierNameItems} />}
                     {eventsAnnotatedIdentifierNameItems && <Select title="Run" onChange={runID => onChangeRun(annotationID, runID)} value={runID} values={[[null, ''], ...runIDTitleItems]} />}
-                    {currentBasicScore !== null &&
+                    {currentBasicScore !== null && lastBasicScore !== null &&
                         <div className="input-group input-group-sm mr-2">
                           <div className="input-group-prepend">
                             <span className="input-group-text">Current score</span>
@@ -188,16 +190,6 @@ Categories = connect(
     })
 )(Categories)
 
-let EventDescription = ({eventInfo}) => (
-    <div>
-        <h5 className="mt-5">Event description</h5>
-        <p dangerouslySetInnerHTML={{__html: objectPath.get(eventInfo, 'description')}} />
-    </div>
-)
-EventDescription = connect(
-    state => ({eventInfo: selectors.getEventInfo(state)})
-)(EventDescription)
-
 let TweetBox = ({tweet}) => (
     <div key={`tweet-${tweet.postID}`}>
         {tweet && <TweetEmbed id={tweet.postID} />}
@@ -217,7 +209,6 @@ const App = () => (
             <div className="row mx-1">
                 <div className="col jumbotron mx-auto" style={{minWidth: "300px", maxWidth: "500px"}}>
                     <TweetBox />
-                    <EventDescription />
                 </div>
                 <div className="col jumbotron ml-2">
                 <Categories />
